@@ -1,0 +1,68 @@
+<html>
+	<head>
+		<title>Order Estimation Calculator</title>
+		<!--<link href="styles.css" rel="stylesheet" type="text/css" />-->
+		<script src="jquery.min.js" type="text/javascript"></script>
+		
+		<style>
+			#estimateForm th,#estimateForm td{vertical-align:middle}
+			.modHeading{background-color:#000;color:#FFF;font-size:18px;font-weight:bold;padding:8px}
+			.firstcol td,.secondcol td{padding-left:5px}
+			.firstcol,.secondcol{line-height:25px}
+			.firstcol{background-color:#eee}
+			.secondcol{background-color:#eee}
+			form#estimateForm select,form#estimateForm input[type="text"]{color:#666}
+			input[type="text"][readonly], input[type="number"][readonly]{ cursor: not-allowed; background-color: #eeeeee; }
+		</style>
+		
+		<script type="text/javascript">
+			function caltotal(){
+				var urgency_val=jQuery('#duration option:selected').attr('title');
+				var urgency_val=jQuery('#duration option:selected').attr('title');
+				var type_of_work_val=jQuery('#worktype option:selected').attr('title');
+				var numpages_val=jQuery('#numpages').val();
+				var total=(Number(urgency_val) + Number(type_of_work_val)) * Number(numpages_val);
+				if(!isNaN(total)){
+					jQuery('#tamount').val(total.toFixed(2));
+				}
+			}
+		</script>
+	</head>
+	<body>
+		<div class=" table-responsive">
+			<form action="index.php?option=com_order" method="post" id="estimateForm" name="estimateForm" class="form-validate" enctype="multipart/form-data">
+				<table class="table"> 
+					<tr> 
+						<td colspan="2" class="modHeading"> Order Estimation Calculator 
+						</td>
+					</tr>
+					<tr class="secondcol">
+						<td>Academic Level/Type of Work:</td>
+						<td>
+							<select name="worktype" id="worktype" onchange="caltotal()"> 
+								<option id="1wt" value="1" title="7">Undergraduate</option>								<option id="2wt" value="2" title="10">Masters</option>								<option id="3wt" value="3" title="11">PhD/Doctoral</option>								<option id="4wt" value="4" title="0">Editing & Proofreading</option>								<option id="5wt" value="5" title="6">Rewriting & Paraphrasing</option>							</select> 
+						</td>
+					</tr>
+					<tr class="firstcol">
+						<td>Duration/Urgency:</td>
+						<td> 
+							<select name="duration" id="duration" class="combobox" onchange="caltotal()">
+								<option id="1u" value="1" title="8.99">30 Days</option>								<option id="2u" value="2" title="9.99">3 Weeks</option>								<option id="3u" value="3" title="10.99">2 Weeks</option>								<option id="4u" value="4" title="11.99">10 Days</option>								<option id="5u" value="5" title="12.99">7 Days</option>								<option id="6u" value="6" title="15.99">5 Days</option>								<option id="7u" value="7" title="16.99">4 Days</option>								<option id="8u" value="8" title="17.99">3 Days</option>								<option id="9u" value="9" title="19.99">48 Hours</option>								<option id="10u" value="10" title="20.99">36 Hours</option>								<option id="11u" value="11" title="22.99">24 Hours</option>
+								<option id="11u" value="11" title="31.99">12 Hours</option>							</select>
+						</td>
+					</tr>
+					<tr class="secondcol">
+						<td>Number of Pages:</td>
+						<td> 
+							<input value="1" size="5" name="numpages" id="numpages" type="number" class="pull-left" oninput="caltotal()" onchange="caltotal()"> 
+						</td>
+					</tr>
+					<tr class="firstcol">
+						<td>Amount Payable:</td>
+						<td> 
+							<input style="color:#000;" name="tamount" type="text" id="tamount" value="" size="10" readonly class="pull-left">
+							<b>USD</b> 
+						</td>
+					</tr>				</table>			</form>		</div>		<script type="text/javascript">caltotal();</script>
+	</body>
+</html>
